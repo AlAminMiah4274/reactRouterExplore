@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import About from './components/About/About';
+import FriendDetails from './components/FriendDetails/FriendDetails';
 import Friends from './components/Friends/Friends';
 import Home from './components/Home/Home';
 import Products from './components/Products/Products';
@@ -12,6 +13,7 @@ function App() {
       path: '/',
       element: <Main></Main>,
       children: [
+        // route
         { path: '/home', element: <Home></Home> },
         { path: 'products', element: <Products></Products> },
         {
@@ -21,9 +23,18 @@ function App() {
           },
           element: <Friends></Friends>
         },
-        { path: 'about', element: <About></About> }
+        { path: 'about', element: <About></About> },
+        // to create dynamic route must use (:) in path
+        {
+          path: '/friend/:friendId',
+          loader: async ({ params }) => {
+            return fetch(`https://jsonplaceholder.typicode.com/users/${params.friendId}`);
+          },
+          element: <FriendDetails></FriendDetails>
+        }
       ]
     },
+    // not found component
     { path: '*', element: <div>This component not found</div> }
   ]);
 
