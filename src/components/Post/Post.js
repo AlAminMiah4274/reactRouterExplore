@@ -16,7 +16,7 @@ const Post = ({ post }) => {
             <h4>{title}</h4>
             <p><small>{body}</small></p>
             {/* 3 way to navigate */}
-            <Link to={`/post/${id}`}>Visit</Link>
+            <Link to={`/post/${id}`}>Visit: {id}</Link>
 
             <Link to={`/post/${id}`}>
                 <button>Show Details</button>
